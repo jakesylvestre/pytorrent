@@ -8,12 +8,6 @@ install:
 - pip install -e .
 - pip install bencode
 
-
-
-before_script:
-- ls
-- pwd
-
 script: 
 - nosetests
 - python pytorrent/tests/unitest.py
