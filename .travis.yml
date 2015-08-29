@@ -4,9 +4,9 @@ python:
   - "2.7"
   #TODO add pypy
 # command to install dependencies
-install: 
+install:
 - pip install -e .
-- pip install bencode
+- pip install -r requirements.txt
 
 
 
@@ -14,6 +14,6 @@ before_script:
 - ls
 - pwd
 
-script: 
+script:
 - nosetests
 - python pytorrent/tests/unitest.py
