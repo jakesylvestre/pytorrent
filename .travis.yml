@@ -16,4 +16,5 @@ before_script:
 
 script:
 - nosetests
+- cd pytorrent && nosetests && cd ..
 - python pytorrent/tests/unitest.py
