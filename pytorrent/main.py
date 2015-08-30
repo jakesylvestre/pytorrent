@@ -5,9 +5,11 @@ Usage python main.py file.torrent
 '''
 import argparse
 import pytorrent.data
+import pytorrent.tracker
 
 def main(filepath):
     data_retreive = pytorrent.data.get_data(filepath)
+    tracker = pytorrent.tracker.tracker_connect(data_retreive)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Download a torrent file, seed, and use DHT.')

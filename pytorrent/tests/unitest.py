@@ -4,6 +4,7 @@ import os
 import bencode
 from pytorrent import data
 import datetime
+import ipgetter
 
 #TODO fix: https://gist.github.com/jakesyl/20a7e0b8d040caf58684
 
@@ -52,5 +53,10 @@ class TestGetData(unittest.TestCase):
         self.test_file = test_file.test_file
         test_data = data.get_data(self.test_file)
         self.assertEqual(test_data.get_creation_date(), test_data.creation_date)
+    def test_ip(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(ipgetter.myip(), test_data.IP )
 if __name__ == '__main__':
     unittest.main()

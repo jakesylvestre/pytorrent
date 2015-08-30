@@ -3,8 +3,9 @@ import hashlib
 from random import choice
 import StringIO
 from datetime import datetime
-
-class get_data(): #TODO write unit tests
+import ipgetter
+from random import randint
+class get_data():
     def __init__(self, filepath):
         self.filepath = filepath
         torrent_file = ''
@@ -19,8 +20,10 @@ class get_data(): #TODO write unit tests
         self.info_hash = self.get_info_hash()
         self.peer_id = self.gen_peer_id()
         self.length = self.get_length()
-        self.left = self.length
+        self.left = self.length#TODO remove this and pertinent unit tests
         self.creation_date = self.get_creation_date()
+        self.IP = ipgetter.myip()
+        self.key = self.get_key()
 
     def get_info_hash(self):
         return hashlib.sha1(bencode.bencode(self.torrent_file['info'])).hexdigest()
@@ -48,3 +51,5 @@ class get_data(): #TODO write unit tests
         date = self.torrent_file['creation date']
         date = datetime.fromtimestamp(date)
         return date
+    def get_key(self):
+        return randint(0, 99999999999999999999)
