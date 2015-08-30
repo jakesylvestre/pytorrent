@@ -4,6 +4,7 @@ from random import choice
 import StringIO
 from datetime import datetime
 import ipgetter
+import os
 from random import randint
 class get_data():
     def __init__(self, filepath):
@@ -24,9 +25,15 @@ class get_data():
         self.creation_date = self.get_creation_date()
         self.IP = ipgetter.myip()
         self.key = self.get_key()
-
+        self.info_hash_hex = self.get_info_hash_hex()
     def get_info_hash(self):
+        '''
+        Jake Sylvestre
+        generate the info_hash based on the info section
+        '''
         return hashlib.sha1(bencode.bencode(self.torrent_file['info'])).hexdigest()
+    def get_info_hash_hex(self):
+        return hashlib.sha1(bencode.bencode(self.torrent_file['info'])).digest()
 
     def get_trackers(self):
             return self.torrent_file['announce-list']
@@ -37,7 +44,7 @@ class get_data():
         random_string = ""
         while len(random_string) != 12:
             random_string += choice("1234567890")
-            return "-" + self.ID + self.VERSION + "-" + random_string
+        return "-" + self.ID + self.VERSION + "-" + random_string
 
     def get_length(self):
         length = 0
@@ -52,4 +59,24 @@ class get_data():
         date = datetime.fromtimestamp(date)
         return date
     def get_key(self):
-        return randint(0, 99999999999999999999)
+
+        try:
+            return os.urandom(20)
+        except NotImplementedError:
+            from random import randint
+            return str(randint(10000000000000000000, 99999999999999999999))
+
+        #return str(randint(10000000000000000000, 99999999999999999999))
+class get_peer_data():
+    def __init__(self, bcode):
+        self.bencode = bcode
+        self.peer_data = bencode.bdecode(self.bencode)#todo convert from binary
+
+    def get_interval(self):
+        return self.peer_data["interval"]
+
+    def get_complete(self):
+        return self.peer_data["complete"]
+
+    def get_incomplete(self):
+        return self.peer_data["incomplete"]
