@@ -11,7 +11,7 @@ def main(filepath):
     data_retreive = pytorrent.data.get_data(filepath)
     tracker = pytorrent.tracker.tracker_connect(data_retreive)
     peers = pytorrent.data.get_peer_data(tracker.fetch_peers())
-    
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Download a torrent file, seed, and use DHT.')
     parser.add_argument('torrent', metavar='t', type= str, nargs='+', help='The torrent file you wish to download')

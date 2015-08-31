@@ -71,6 +71,8 @@ class get_peer_data():
     def __init__(self, bcode):
         self.bencode = bcode
         self.peer_data = bencode.bdecode(self.bencode)#todo convert from binary
+        self.peers = self.peer_data["peers"]
+        self.peers = self.peers.decode()
 
     def get_interval(self):
         return self.peer_data["interval"]

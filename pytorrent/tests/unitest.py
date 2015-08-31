@@ -62,6 +62,6 @@ class TestGetData(unittest.TestCase):
         test_file = get_test_file()
         self.test_file = test_file.test_file
         test_data = data.get_data(self.test_file)
-        self.assertEqual(20, len(test_data.gen_peer_id))
+        self.assertEqual(20, len(test_data.gen_peer_id()))
 if __name__ == '__main__':
     unittest.main()

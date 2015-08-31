@@ -55,6 +55,7 @@ class tracker_connect():#TODO write unit test
             self.announce = self.find_http_announce_url()
             self.url_form(self.announce, 'started')
         else:
+            print r.url
             if return_type == "binary":
                 return r.content
             elif return_type == "text":
