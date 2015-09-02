@@ -50,12 +50,11 @@ class tracker_connect():#TODO write unit test
     def fetch_peers(self, return_type="binary"):
         paramaters = self.url_form('started')
         r = requests.get(self.announce, params=paramaters)
-        if "d14:failure" or "your client is outdated, please upgrade" in r.text:# TODO add errors
+        if ("d14:failure" in r.text) or ("your client is outdated, please upgrade" in r.text):# TODO add errors
             self.bad_trackers.append(self.announce)
             self.announce = self.find_http_announce_url()
             self.url_form(self.announce, 'started')
         else:
-            print r.url
             if return_type == "binary":
                 return r.content
             elif return_type == "text":

@@ -6,6 +6,8 @@ from datetime import datetime
 import ipgetter
 import os
 from random import randint
+import socket
+import struct
 class get_data():
     def __init__(self, filepath):
         self.filepath = filepath
@@ -69,10 +71,15 @@ class get_data():
         #return str(randint(10000000000000000000, 99999999999999999999))
 class get_peer_data():
     def __init__(self, bcode):
-        self.bencode = bcode
-        self.peer_data = bencode.bdecode(self.bencode)#todo convert from binary
+        print bcode
+        self.peer_data = bencode.bdecode(bcode)#todo convert from binary
         self.peers = self.peer_data["peers"]
-        self.peers = self.peers.decode()
+        for peer in xrange(0, len(self.peers), 6):
+            ip, port = struct.unpack('!4sH', self.peers[peer:peer+6])
+            ip = socket.inet_ntop(socket.AF_INET, ip)
+            print ip + ":" + str(port)
+        #self.peers = self.peers.decode()    family = sa.sa_family
+
 
     def get_interval(self):
         return self.peer_data["interval"]
