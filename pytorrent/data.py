@@ -71,13 +71,15 @@ class get_data():
         #return str(randint(10000000000000000000, 99999999999999999999))
 class get_peer_data():
     def __init__(self, bcode):
-        print bcode
         self.peer_data = bencode.bdecode(bcode)#todo convert from binary
         self.peers = self.peer_data["peers"]
+        final_peers = []
         for peer in xrange(0, len(self.peers), 6):
             ip, port = struct.unpack('!4sH', self.peers[peer:peer+6])
             ip = socket.inet_ntop(socket.AF_INET, ip)
-            print ip + ":" + str(port)
+            host = (ip, port)
+            final_peers += host
+        self.peers = final_peers
         #self.peers = self.peers.decode()    family = sa.sa_family
 
 
@@ -89,3 +91,6 @@ class get_peer_data():
 
     def get_incomplete(self):
         return self.peer_data["incomplete"]
+
+    def get_peers(self):
+        return self.peers
