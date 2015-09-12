@@ -3,6 +3,12 @@ python:
   - "2.6"
   - "2.7"
   - "pypy"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5.0b3"
+  - "3.5-dev"
+  - "nightly"
   #TODO add pypy
 # command to install dependencies
 install:
@@ -18,3 +24,13 @@ script:
 - nosetests
 - cd pytorrent && nosetests && cd ..
 - python pytorrent/tests/unitest.py
+
+matrix:
+  allow_failures:
+    - "pypy"
+    - "3.2"
+    - "3.3"
+    - "3.4"
+    - "3.5.0b3"
+    - "3.5-dev"
+    - "nightly"
