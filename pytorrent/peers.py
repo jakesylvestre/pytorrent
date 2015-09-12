@@ -10,14 +10,16 @@ class peer_connect:
         self.peer = peer
         self.address = self.peer[0]
         self.port = self.peer[1]
-        print "handshake is " + type(self.send_handshake())
-        
+        self.datas = self.send_handshake()
+        print "handshake is " + str(type(self.datas))
+        print str(self.datas)
+        print self.datas
     def send_handshake(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(self.peer)
         s.send(self.data.handshake)
 
-        data = s.recv(len(self.data.handshake))
+        data = s.recv(4696) #TODO after testing revert to: len(self.data.handshake
         s.close()
 
         return data
