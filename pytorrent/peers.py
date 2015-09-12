@@ -11,8 +11,9 @@ class peer_connect:
         self.port = self.peer[1]
 
     def init_connection(self):
-        self.connection = socket.create_connection((self.address, self.port, ))
-        print "connection to " + self.connection
+        print (self.peer)
+        self.connection = socket.create_connection(self.peer)
+        print "connection to " + str(self.connection)
         return self.connection
 
     def get_peer(self):
