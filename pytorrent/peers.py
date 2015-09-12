@@ -10,8 +10,8 @@ class peer_connect:
         self.peer = peer
         self.address = self.peer[0]
         self.port = self.peer[1]
-        print "handshake is " + str(self.send_handshake())
-
+        print "handshake is " + type(self.send_handshake())
+        
     def send_handshake(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(self.peer)
