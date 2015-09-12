@@ -88,7 +88,7 @@ class get_data():
             except:
                 print "ERROR returning " + str(port)
                 return port
-    def get_handshake():
+    def get_handshake(self):
         return str(len(self.PROTOCOL)) + self.PROTOCOL + self.RESERVED + self.info_hash_hex + self.peer_id
 
 
