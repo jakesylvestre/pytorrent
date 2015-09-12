@@ -18,7 +18,7 @@ def main(filepath):
     network =  pytorrent.network.network_info()
     #TODO add networking
     print peers
-    peer = pytorrent.peers.peer_connect((peers[0], peers[1]), network)
+    peer = pytorrent.peers.peer_connect((peers[0], peers[1]), network, data_retreive)
     peer.init_connection()
 
 if __name__ == "__main__":

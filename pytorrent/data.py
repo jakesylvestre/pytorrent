@@ -19,6 +19,8 @@ class get_data():
         self.torrent_file = bencode.bdecode(torrent_file)
         self.ID = "PT"
         self.VERSION = "0000"
+        self.RESERVED = "00000000"
+        self.PROTOCOL = "BitTorrent protocol"
         self.trackers = self.get_trackers()
         self.info_hash = self.get_info_hash()
         self.peer_id = self.gen_peer_id()
@@ -28,6 +30,8 @@ class get_data():
         self.IP = ipgetter.myip()
         self.key = self.get_key()
         self.info_hash_hex = self.get_info_hash_hex()
+        self.port = self.get_port()
+        self.handshake = self.get_handshake()
     def get_info_hash(self):
         '''
         Jake Sylvestre
@@ -67,6 +71,26 @@ class get_data():
         except NotImplementedError:
             from random import randint
             return str(randint(10000000000000000000, 99999999999999999999))
+    def get_port(self):
+        for port in range(6881, 6889):
+            try:
+                result = socket.socket.connect_ex(('127.0.0.1', port))
+                if result==0:
+                    return port
+                else:
+                    continue
+            except AttributeError as e:
+                print e
+                return port
+            except TypeError as e:
+                print e
+                return port
+            except:
+                print "ERROR returning " + str(port)
+                return port
+    def get_handshake():
+        return str(len(self.PROTOCOL)) + self.PROTOCOL + self.RESERVED + self.info_hash_hex + self.peer_id
+
 
         #return str(randint(10000000000000000000, 99999999999999999999))
 class get_peer_data():

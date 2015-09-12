@@ -40,7 +40,7 @@ class tracker_connect():#TODO write unit test
             'numwant' : numwant,
             'key' : self.data.key,
             'compact' : 1,
-            'port': 6881
+            'port': self.data.port
             }
         return paramaters
 
