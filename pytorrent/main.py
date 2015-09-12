@@ -19,7 +19,6 @@ def main(filepath):
     #TODO add networking
     print peers
     peer = pytorrent.peers.peer_connect((peers[0], peers[1]), network, data_retreive)
-    peer.init_connection()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Download a torrent file, seed, and use DHT.')
