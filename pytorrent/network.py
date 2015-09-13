@@ -1,11 +1,30 @@
-import socket
+from twisted.internet import protocol
 
-class network_info:
-    def __init__(self):
-        self.ipv6 = socket.has_ipv6
-        self.timeout = socket.getdefaulttimeout()
-    def has_ipv6(self):
-        return self.ipv6
 
-    def get_timeout(self):
-        return self.timeout
+class Received(Protocol):
+    output = ""
+
+    def dataReceived(self, data):
+        output += data
+        if len(output) == 9:
+            #somehow close the connection
+            return output
+class peer(protocol.Factory):
+    def startedConnecting(self, connector):
+        pass
+
+    def buildProtocol(self, addr):
+        print 'Connected.'
+        print 'Resetting reconnection delay'
+        self.resetDelay()
+        return Received() #Start receiving data
+
+    def clientConnectionLost(self, connector, reason):
+        pass
+        #print 'Lost connection.  Reason:', reason
+        #ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
+
+    def clientConnectionFailed(self, connector, reason):
+        pass
+        #print 'Connection failed. Reason:', reason
+        #ReconnectingClientFactory.clientConnectionFailed(self, connector,

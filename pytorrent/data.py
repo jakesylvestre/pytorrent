@@ -10,6 +10,7 @@ import socket
 import struct
 class get_data():
     def __init__(self, filepath):
+        print a
         self.filepath = filepath
         torrent_file = ''
         self.file =  open(self.filepath, 'rb')
@@ -32,6 +33,8 @@ class get_data():
         self.info_hash_hex = self.get_info_hash_hex()
         self.port = self.get_port()
         self.handshake = self.get_handshake()
+        self.ipv6 = socket.has_ipv6
+        self.timeout = socket.getdefaulttimeout()
     def get_info_hash(self):
         '''
         Jake Sylvestre

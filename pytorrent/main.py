@@ -8,17 +8,16 @@ import pytorrent.data
 import pytorrent.tracker
 import pytorrent.network
 import pytorrent.peers
+from twisted.internet import reactor
 
 def main(filepath):
     data_retreive = pytorrent.data.get_data(filepath)
     tracker = pytorrent.tracker.tracker_connect(data_retreive)
     peers = pytorrent.data.get_peer_data(tracker.fetch_peers())
     peers = peers.get_peers()
-    print type(peers)
-    network =  pytorrent.network.network_info()
-    #TODO add networking
-    print peers
-    peer = pytorrent.peers.peer_connect((peers[0], peers[1]), network, data_retreive)
+    twisted.callWhenRunning(pytorrent.peers.connect_to_peers((peers), data_retreive))
+
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Download a torrent file, seed, and use DHT.')

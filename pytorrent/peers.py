@@ -4,9 +4,9 @@ import pytorrent.network
 #from network import network_info
 
 class peer_connect:
-    def __init__(self, peer, network_info, data):
+    def __init__(self, peer, data):
         self.data = data
-        self.network = pytorrent.network.network_info()
+        self.network = pytorrent.network.network_info()  #TODO all this crap gets inherited from connect to peers
         self.peer = peer
         self.address = self.peer[0]
         self.port = self.peer[1]
@@ -32,3 +32,23 @@ class peer_connect:
 
     def get_port(self):
         return self.port
+
+class connect_to_peers:
+    def __init__(self, peers, data, reactor):
+            from twisted.internet import reactor
+            self.data = data
+            self.network = network
+            self.peers = peers
+    def handshake():
+        peer = tuple
+        for data in self.peers:
+            if len(peer) == 0:
+                peer = (data, )
+                self.peers.pop(0)
+                continue
+            elif len(peer) == 1:
+                peer = peer + (data, )
+                self.peers.pop(0)
+                continue
+            elif len(peer) == 2:
+                reactor.connectTCP(host, port, .factory)
