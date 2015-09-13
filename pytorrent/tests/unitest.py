@@ -4,6 +4,7 @@ import os
 import bencode
 from pytorrent import data
 import datetime
+import ipgetter
 
 #TODO fix: https://gist.github.com/jakesyl/20a7e0b8d040caf58684
 
@@ -52,5 +53,50 @@ class TestGetData(unittest.TestCase):
         self.test_file = test_file.test_file
         test_data = data.get_data(self.test_file)
         self.assertEqual(test_data.get_creation_date(), test_data.creation_date)
+    def test_ip(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(ipgetter.myip(), test_data.IP)
+    def test_peer_id(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(20, len(test_data.gen_peer_id()))
+    def test_id(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(len(test_data.ID), 2)
+    def test_version(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(len(test_data.VERSION), 4)
+    def test_reserved(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(len(test_data.RESERVED), 8)
+    def test_protocol(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(test_data.PROTOCOL, "BitTorrent protocol")
+    def test_info_hash(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(len(test_data.info_hash), 40)
+    def test_info_hash_hex(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(len(test_data.info_hash_hex), 20)
+    def test_handshake(self):
+        test_file = get_test_file()
+        self.test_file = test_file.test_file
+        test_data = data.get_data(self.test_file)
+        self.assertEqual(len(test_data.handshake), 69)
 if __name__ == '__main__':
     unittest.main()
