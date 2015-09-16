@@ -10,7 +10,6 @@ import socket
 import struct
 class get_data():
     def __init__(self, filepath):
-        print a
         self.filepath = filepath
         torrent_file = ''
         self.file =  open(self.filepath, 'rb')
