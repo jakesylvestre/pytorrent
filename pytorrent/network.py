@@ -1,7 +1,7 @@
 from twisted.internet import protocol
 
 
-class Received(Protocol):
+class Received(Protocol): #TODO add constructors
     output = ""
 
     def dataReceived(self, data):
