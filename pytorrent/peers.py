@@ -1,6 +1,6 @@
-import twisted #TODO implement twisted
+from twisted.internet import reactor #TODO implement twisted
 import socket
-import pytorrent.network
+import pytorrent.network as network
 #from network import network_info
 
 class peer_connect:
@@ -37,10 +37,11 @@ class connect_to_peers:
     def __init__(self, peers, data):
             from twisted.internet import reactor
             self.data = data
-            self.network = pytorrent.network
+            self.network = network
             self.peers = peers
-    def handshake():
-        peer = tuple
+    def handshake(self):
+        peer = ()
+        print self.peers[1]
         for data in self.peers:
             if len(peer) == 0:
                 peer = (data, )
@@ -51,4 +52,7 @@ class connect_to_peers:
                 self.peers.pop(0)
                 continue
             elif len(peer) == 2:
-                reactor.connectTCP(host, port, network.peer())
+                print "ip is " + peer[0]
+                print "peer is " + peer[1] 
+                reactor.connectTCP(self.peers[0], self.peers[1], network.peer())
+                peer = ()
