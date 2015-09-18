@@ -1,4 +1,4 @@
-from twisted.internet import protocol
+from twisted.internet.protocol import Protocol, ClientFactory
 
 
 class Received(Protocol): #TODO add constructors
@@ -9,7 +9,7 @@ class Received(Protocol): #TODO add constructors
         if len(output) == 9:
             #somehow close the connection
             return output
-class peer(protocol.Factory):
+class peer(ClientFactory):
     def startedConnecting(self, connector):
         pass
 
@@ -21,7 +21,7 @@ class peer(protocol.Factory):
 
     def clientConnectionLost(self, connector, reason):
         pass
-        #print 'Lost connection.  Reason:', reason
+        #print 'Lost connectiom.  Reason:', reason
         #ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 
     def clientConnectionFailed(self, connector, reason):

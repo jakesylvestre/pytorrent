@@ -34,10 +34,10 @@ class peer_connect:
         return self.port
 
 class connect_to_peers:
-    def __init__(self, peers, data, reactor):
+    def __init__(self, peers, data):
             from twisted.internet import reactor
             self.data = data
-            self.network = network
+            self.network = pytorrent.network
             self.peers = peers
     def handshake():
         peer = tuple
@@ -51,4 +51,4 @@ class connect_to_peers:
                 self.peers.pop(0)
                 continue
             elif len(peer) == 2:
-                reactor.connectTCP(host, port, .factory)
+                reactor.connectTCP(host, port, network.peer())

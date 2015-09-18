@@ -9,13 +9,13 @@ import pytorrent.tracker
 import pytorrent.network
 import pytorrent.peers
 from twisted.internet import reactor
-
 def main(filepath):
     data_retreive = pytorrent.data.get_data(filepath)
     tracker = pytorrent.tracker.tracker_connect(data_retreive)
     peers = pytorrent.data.get_peer_data(tracker.fetch_peers())
     peers = peers.get_peers()
-    twisted.callWhenRunning(pytorrent.peers.connect_to_peers((peers), data_retreive))
+    reactor.callWhenRunning(pytorrent.peers.connect_to_peers(peers, data_retreive))
+    reactor.run()
 
 
 
