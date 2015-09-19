@@ -52,7 +52,7 @@ class connect_to_peers:
                 self.peers.pop(0)
                 continue
             elif len(peer) == 2:
-                print "ip is " + peer[0]
-                print "peer is " + peer[1] 
+                print "ip is " + str(peer[0])
+                print "peer is " + str(peer[1])
                 reactor.connectTCP(self.peers[0], self.peers[1], network.peer())
                 peer = ()

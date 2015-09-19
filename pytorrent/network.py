@@ -16,7 +16,7 @@ class peer(ClientFactory):
     def buildProtocol(self, addr):
         print 'Connected.'
         print 'Resetting reconnection delay'
-        self.resetDelay()
+        #self.resetDelay()
         return Received() #Start receiving data
 
     def clientConnectionLost(self, connector, reason):
