@@ -39,7 +39,7 @@ class connect_to_peers:
             self.data = data
             self.network = network
             self.peers = peers
-            self.handshake = self.data.handshake
+            self.myhandshake = self.data.handshake
     def handshake(self):
         peer = ()
         print self.peers[1]
@@ -55,5 +55,5 @@ class connect_to_peers:
             elif len(peer) == 2:
                 print "ip is " + str(peer[0])
                 print "peer is " + str(peer[1])
-                reactor.connectTCP(self.peers[0], self.peers[1], network.peer(self.handshake))
+                reactor.connectTCP(self.peers[0], self.peers[1], network.peer(self.myhandshake))
                 peer = ()
